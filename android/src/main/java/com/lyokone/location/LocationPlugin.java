@@ -279,7 +279,7 @@ public class LocationPlugin implements MethodCallHandler, StreamHandler, PluginR
                 loc.put("heading", (double) location.getBearing());
                 loc.put("time", (double) location.getTime());
                 if (Build.VERSION.SDK_INT >= 18)
-                    loc.put("isMock", location.isFromMockProvider());
+                    loc.put("isMock", isMockFlagEnabled());
                 if (result != null) {
                     result.success(loc);
                     result = null;
@@ -311,6 +311,12 @@ public class LocationPlugin implements MethodCallHandler, StreamHandler, PluginR
                 }
             };
         }
+    }
+
+    private boolean isMockFlagEnabled() {
+        return !Settings.Secure.getString(activity.getContentResolver(),
+                Settings.Secure.ALLOW_MOCK_LOCATION).equals("0");
+
     }
 
     /**
