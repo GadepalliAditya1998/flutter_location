@@ -84,7 +84,7 @@ class Location {
   Stream<LocationData> onLocationChanged() {
     if (_onLocationChanged == null) {
       _onLocationChanged = _stream.receiveBroadcastStream().map<LocationData>(
-          (element) => LocationData.fromMap(element.cast<String, double>()));
+          (element) => LocationData.fromMap(element.cast<String, dynamic>()));
     }
     return _onLocationChanged;
   }
